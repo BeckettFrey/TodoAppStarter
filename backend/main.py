@@ -1,36 +1,21 @@
 # File: backend/main.py
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-from typing import List
+from fastapi import FastAPI
+from contextlib import asynccontextmanager
+from database.mongodb import db
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    try:
+        await db.command("ping")
+        print("✅ MongoDB connection successful.")
+    except Exception as e:
+        print("❌ MongoDB connection failed:", e)
+    yield
+    # Optionally: await db.client.close()
 
-class Todo(BaseModel):
-    id: int
-    title: str
-    completed: bool = False
+app = FastAPI(lifespan=lifespan)
 
-todos: List[Todo] = []
+# Import routes AFTER app creation
+from routes.todo import router as todo_router
 
-@app.get("/todos", response_model=List[Todo])
-def get_todos():
-    return todos
-
-@app.post("/todos", response_model=Todo)
-def create_todo(todo: Todo):
-    todos.append(todo)
-    return todo
-
-@app.put("/todos/{todo_id}", response_model=Todo)
-def update_todo(todo_id: int, updated: Todo):
-    for i, t in enumerate(todos):
-        if t.id == todo_id:
-            todos[i] = updated
-            return updated
-    raise HTTPException(status_code=404, detail="Todo not found")
-
-@app.delete("/todos/{todo_id}")
-def delete_todo(todo_id: int):
-    global todos
-    todos = [t for t in todos if t.id != todo_id]
-    return {"message": "Todo deleted"}
+app.include_router(todo_router, prefix="/api", tags=["todos"])
