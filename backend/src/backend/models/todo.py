@@ -1,4 +1,4 @@
-# File: backend/models/todo.py
+# File: backend/src/backend/models/todo.py
 from pydantic import BaseModel
 
 class TodoBase(BaseModel):

@@ -1,4 +1,4 @@
-# File: backend/database/mongodb.py
+# File: backend/src/backend/database/mongodb.py
 from motor.motor_asyncio import AsyncIOMotorClient
 from os import getenv
 from dotenv import load_dotenv
@@ -10,3 +10,5 @@ MONGO_DB_NAME = getenv("MONGO_DB_NAME", "todo_db")
 
 client = AsyncIOMotorClient(MONGODB_URL)
 db = client[MONGO_DB_NAME]
+
+

@@ -1,7 +1,7 @@
-# File: backend/main.py
+# File: backend/src/backend/main.py
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
-from database.mongodb import db
+from backend.database.mongodb import db, client
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -11,11 +11,14 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         print("❌ MongoDB connection failed:", e)
     yield
-    # Optionally: await db.client.close()
 
 app = FastAPI(lifespan=lifespan)
+@app.on_event("shutdown")
+async def shutdown():
+    client.close()
 
 # Import routes AFTER app creation
-from routes.todo import router as todo_router
+from backend.routes.todo import router as todo_router
 
 app.include_router(todo_router, prefix="/api", tags=["todos"])
+
