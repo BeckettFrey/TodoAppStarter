@@ -2,7 +2,7 @@
 
 **TodoAppStarter** is a minimal FastAPI + MongoDB backend — clean, Dockerized, and structured for clarity.
 
->  🧠 This project is a **personal building block** where I introduced myself to FastAPI, explored the `mongosh` CLI, dockerized a deployable MongoDB + FastAPI backend, enforced PEP and modern Python best practices, and applied clean coding principles
+> 🧠 This project is a **personal building block** where I introduced myself to FastAPI, explored the `mongosh` CLI, dockerized a deployable MongoDB + FastAPI backend, enforced PEP and modern Python best practices, and applied clean coding principles
 
 ## 🔧 Tech Stack
 
@@ -14,13 +14,13 @@
 
 ## ✅ Features
 
-* RESTful API with FastAPI
-* Async MongoDB integration (`motor`) with proper connection management
-* Dockerized and production-ready deployment
-* PEP-compliant code following modern Python standards
-* Clean OOP architecture with separation of concerns
-* Structured using `pyproject.toml` + `setuptools`
-* Comprehensive unit + integration test coverage
+* REST-style API built with FastAPI
+* Async MongoDB access using motor, with basic connection handling
+* Docker setup for local dev and deployment experiments
+* Organized project structure with pyproject.toml and setuptools
+* Simple OOP-style separation between routes, logic, and data access
+* Unit and integration test scaffolding using pytest
+* Focused more on learning and exploration than polish or completeness
 
 ## 🚀 Quickstart
 
@@ -116,7 +116,7 @@ This repo documents my hands-on exploration of modern backend development. Throu
 * **Mastered MongoDB CLI**: Explored mongosh for direct database interaction, debugging, and management
 * **Dockerized Production Apps**: Created a fully containerized, deployable backend
 * **Applied Modern Python Standards**: Enforced PEP compliance, and effective Python best practices
-* **Implemented Clean Architecture**: Used Dependency injection, and separation of concerns for maintainable code
+* **Implemented Clean Architecture**: practiced separation of concerns for maintainable code
 
 ## License
 
