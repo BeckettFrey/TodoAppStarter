@@ -6,12 +6,11 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "fastapi",
-    "uvicorn[standard]",
+    "uvicorn",
     "pymongo",
     "python-dotenv",
     "pydantic",
     "pytest",
-    "httpx",
     "motor"
 ]
 
